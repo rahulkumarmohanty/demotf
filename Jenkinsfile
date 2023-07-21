@@ -49,6 +49,7 @@ pipeline {
             post {
                 always{
                     archiveArtifacts artifacts:'myplan.tfplan', onlyIfSuccessful: true
+                    archiveArtifacts artifacts:'.terraform', onlyIfSuccessful: true
                 }
             }
         }        
