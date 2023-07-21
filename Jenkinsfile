@@ -51,6 +51,59 @@ pipeline {
                     archiveArtifacts artifacts:'*', onlyIfSuccessful: true
                 }
             }
-        }        
+        }
+        
+        stage('Terraform Plan View') {
+            steps {
+                sh 'terraform show myplan.tfplan > readable_plan.txt'
+                sh 'cat readable_plan.txt'
+            }
+        }
+        
+        stage('Tfsec Check for potential security issues') {
+            steps {
+                script {
+                  try {
+                    sh 'tfsec .'
+                } catch (Exception e) {
+                    // handle the error or ignore it
+                        echo "Error occurred: ${e.message}"
+                }
+             }
+          }
+        }
+        
+        stage('Checkov') {
+            steps {
+                script {
+                  try {
+                    sh 'checkov -d .'
+                } catch (err) {
+                  echo 'Checkov check failed, continuing pipeline'
+                  echo err.getMessage()
+                }
+              }
+           }
+        }
+
+
+        stage('Infracost Breakdown') {
+            steps {
+                sh 'infracost breakdown --path myplan.tfplan'
+            }
+        }
+        
+        stage('Drift Detection') {
+            steps {
+                script {
+                  try {
+                    sh 'driftctl scan --from tfstate+s3://1ch-aws-terraform/terraform.tfstate'
+                } catch (Exception e) {
+                    // handle the error
+                    echo "Error occurred: ${e.message}"
+                }
+             }
+          }
+        }
     }
 }
