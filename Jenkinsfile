@@ -46,11 +46,11 @@ pipeline {
                     writeFile file: 'tfplan', text: tfplan
                 }
             }
-        }
-        post {
-            always {
-                archiveArtifacts artifacts:'myplan.tfplan', onlyIfSuccessful: true
+            post {
+                always{
+                    archiveArtifacts artifacts:'myplan.tfplan', onlyIfSuccessful: true
+                }
             }
-        }
+        }        
     }
 }
