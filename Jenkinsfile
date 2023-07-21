@@ -47,5 +47,10 @@ pipeline {
                 }
             }
         }
+        post {
+            always {
+                archiveArtifacts artifacts:'myplan.tfplan', onlyIfSuccessful: true
+            }
+        }
     }
 }
