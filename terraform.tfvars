@@ -1,5 +1,5 @@
 location                 = "East US"
-name                     = "vfkvjjvnjkfvnd"
+name                     = "gdvcudackdcda"
 resource_group_create    = true
 resource_group_name      = "RG2"
 access_tier              = "Hot"
