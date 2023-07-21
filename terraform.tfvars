@@ -1,7 +1,7 @@
 location                 = "East US"
 name                     = "gbeirhgkshlbvjs"
 resource_group_create    = true
-resource_group_name      = "RG1-rg"
+resource_group_name      = "RG2"
 access_tier              = "Hot"
 account_kind             = "StorageV2"
 account_replication_type = "LRS"
