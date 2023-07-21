@@ -17,7 +17,7 @@ pipeline {
         stage('azure cli logging') {
             steps{
                 sh 'az login --service-principal --username ${APP_ID} --password ${SECRET_KEY} --tenant ${TENANT_ID}'
-                sh 'az account set --subscription "{SUBSCRIPTION_ID}'
+                sh 'az account set --subscription ${SUBSCRIPTION_ID}'
             }
         }
 
