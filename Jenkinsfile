@@ -43,7 +43,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 script {
-                    def tfplan = sh(script: 'terraform plan --var-file=${param.tfvars} -out=myplan.tfplan -input=false', returnStdout: true).trim()
+                    def tfplan = sh(script: 'terraform plan --var-file=${tfvars} -out=myplan.tfplan -input=false', returnStdout: true).trim()
                     writeFile file: 'tfplan', text: tfplan
                 }
             }
