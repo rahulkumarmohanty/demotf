@@ -11,6 +11,7 @@ pipeline {
         choice choices: ['Windows VM'], description: 'Choose any one of the Resource to deploy in the Azure Environment..', name: 'resource'
         choice choices: ['2ed1a4b1-8d67-48fb-8ef6-0d8fa4ab6a5d'], description: 'Choose any of the subscription id..', name: 'ARM_SUBSCRIPTION_ID'
         string(name: 'ARM_CLIENT_SECRET', description: 'Enter the client secret')
+        string(name: 'tfvars',description: 'Enter the tfvars file name')
     }
 
     stages {
@@ -42,7 +43,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 script {
-                    def tfplan = sh(script: 'terraform plan -out=myplan.tfplan -input=false', returnStdout: true).trim()
+                    def tfplan = sh(script: 'terraform plan --var-file={param.tfvars} -out=myplan.tfplan -input=false', returnStdout: true).trim()
                     writeFile file: 'tfplan', text: tfplan
                 }
             }
