@@ -112,7 +112,6 @@ pipeline {
                     // handle the error
                     echo "Error occurred: ${e.message}"
                 }
-                clearWs()
              }
           }
         }
