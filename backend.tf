@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = var.bucket
+    bucket = "interal-platform-statefile-jenkins"
     key = var.key
-    region = var.region
+    region = "ap-south-1"
   }
 }
