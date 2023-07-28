@@ -33,7 +33,7 @@ pipeline {
 
         stage('Terraform Initialize') {
             steps {
-                sh 'terraform init --backend-config=backend-conffinal.tfvars'
+                sh 'terraform init --backend-config=backend-conffinal.tfvars -reconfigure'
             }
        }
 
