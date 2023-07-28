@@ -24,8 +24,10 @@ pipeline {
 
         stage('terraform state creation') {
             steps{
-                def content = '''key = "test/tfstate"'''
-                writeFile file: 'backend-conf1.tfvars', text: content
+                script{
+                    def content = '''key = "test/tfstate"'''
+                    writeFile file: 'backend-conf1.tfvars', text: content
+                }
             }
         }
 
