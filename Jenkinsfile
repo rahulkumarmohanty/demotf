@@ -12,6 +12,7 @@ pipeline {
         choice choices: ['2ed1a4b1-8d67-48fb-8ef6-0d8fa4ab6a5d'], description: 'Choose any of the subscription id..', name: 'ARM_SUBSCRIPTION_ID'
         string(name: 'ARM_CLIENT_SECRET', description: 'Enter the client secret')
         string(name: 'tfvars',description: 'Enter the tfvars file name')
+        string(name: 'account',description: 'Enter the account name')
     }
 
     stages {
@@ -25,7 +26,7 @@ pipeline {
         stage('terraform state creation') {
             steps{
                 script{
-                    def content = "key = \"test1/tfstate${env.BUILD_NUMBER}\""
+                    def content = "key = \"${account}/tfstate${env.BUILD_NUMBER}\""
                     writeFile file: 'backend-conffinal.tfvars', text: content
                 }
             }
