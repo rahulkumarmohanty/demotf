@@ -25,15 +25,15 @@ pipeline {
         stage('terraform state creation') {
             steps{
                 script{
-                    def content = '''key = "test/tfstate"'''
-                    writeFile file: 'backend-conf${BUILD_NUMBER}.tfvars', text: content
+                    def content = '''key = "test/tfstate${BUILD_NUMBER}"'''
+                    writeFile file: 'backend-conffinal.tfvars', text: content
                 }
             }
         }
 
         stage('Terraform Initialize') {
             steps {
-                sh 'terraform init --backend-config=backend-conf${BUILD_NUMBER}.tfvars'
+                sh 'terraform init --backend-config=backend-conffinal.tfvars'
             }
        }
 
